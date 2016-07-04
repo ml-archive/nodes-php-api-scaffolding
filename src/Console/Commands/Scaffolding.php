@@ -426,7 +426,7 @@ class Scaffolding extends Command
     {
         $this->comment('Copying database migrations ...');
         $this->copyDirectory(base_path('vendor/nodes/api-scaffolding/database/migrations/auth'), database_path('migrations'));
-        $this->copyDirectory(base_path('vendor/nodes/api-scaffolding/database/migrations/email-verification'), database_path('migrations'));
+        $this->copyDirectory(base_path('vendor/nodes/api-scaffolding/database/migrations/email-verifications'), database_path('migrations'));
 
         $this->deleteLaravelBoilerplate();
 
