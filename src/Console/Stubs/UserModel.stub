@@ -1,0 +1,143 @@
+<?php
+namespace DummyNamespace\Models\Users;
+
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Hash;
+use Nodes\Database\Eloquent\Model as NodesModel;
+
+/**
+ * Class User
+ *
+ * @package DummyNamespace\Models\Users
+ */
+class User extends NodesModel
+{
+    /**
+     * The table associated with the model
+     *
+     * @var string
+     */
+    protected $table = 'users';
+
+    /**
+     * The attributes that aren't mass assignable
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'is_verified',
+        'verified_at',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays
+     *
+     * @var array
+     */
+    protected $hidden = ['password'];
+
+    /**
+     * The attributes that should be cast to native types
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_verified' => 'boolean'
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['verified_at'];
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        self::updated(function($user) {
+            if (function_exists('cache_forgot')) {
+                cache_forget('api.userToken', ['accessToken' => $user->getToken()]);
+            }
+        });
+    }
+
+    /*
+    |-----------------------------------------------------------
+    | Relations
+    |-----------------------------------------------------------
+    */
+
+    /**
+     * User has one access token
+     *
+     * @access public
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function token()
+    {
+        return $this->hasOne(\DummyNamespace\Models\Users\Tokens\Token::class, 'user_id', 'id');
+    }
+
+    /*
+    |-----------------------------------------------------------
+    | Helpers
+    |-----------------------------------------------------------
+    */
+    
+    /**
+     * Retrieve user's token
+     *
+     * @author Casper Rasmussen <cr@nodes.dk>
+     *
+     * @access public
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token->token;
+    }
+
+    /**
+     * Check if user is verified
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     *
+     * @access public
+     * @return boolean
+     */
+    public function isVerified()
+    {
+        return (bool) $this->is_verified;
+    }
+
+    /*
+    |-----------------------------------------------------------
+    | Mutators
+    |-----------------------------------------------------------
+    */
+
+    /**
+     * Automatically hash password attribute
+     *
+     * @access public
+     * @param  string $value
+     * @return $this
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+        return $this;
+    }
+}
