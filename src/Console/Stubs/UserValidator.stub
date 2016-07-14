@@ -28,7 +28,7 @@ class UserValidator extends AbstractValidator
      *
      * @var array
      */
-    protected $codes = [
+    protected $errorCodes = [
         'email.unique' => 450
     ];
 }
