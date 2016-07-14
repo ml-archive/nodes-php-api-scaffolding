@@ -1,8 +1,11 @@
 <?php
+namespace DummyNamespace\Models\Users;
+
 use Illuminate\Support\Facades\Hash;
 use Nodes\Database\Eloquent\Repository as NodesRepository;
 use DummyNamespace\Models\Users\Tokens\Token;
 use DummyNamespace\Models\Users\Validation\UserValidator;
+use Carbon\Carbon;
 
 /**
  * Class UserRepository
