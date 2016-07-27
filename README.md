@@ -10,6 +10,7 @@ A package which scaffolds the most common stuff used in a [Nodes API](http://nod
 [![Star repository on GitHub](https://img.shields.io/github/stars/nodes-php/api-scaffolding.svg?style=social&label=Star)](https://github.com/nodes-php/api-scaffolding/stargazers)
 [![Watch repository on GitHub](https://img.shields.io/github/watchers/nodes-php/api-scaffolding.svg?style=social&label=Watch)](https://github.com/nodes-php/api-scaffolding/watchers)
 [![Fork repository on GitHub](https://img.shields.io/github/forks/nodes-php/api-scaffolding.svg?style=social&label=Fork)](https://github.com/nodes-php/api-scaffolding/network)
+[![StyleCI](https://styleci.io/repos/62562441/shield)](https://styleci.io/repos/62562441)
 
 ## 📝 Introduction
 
