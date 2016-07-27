@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateTableUserVerifications extends Migration
 {
@@ -12,8 +12,7 @@ class CreateTableUserVerifications extends Migration
      */
     public function up()
     {
-        Schema::create('user_verifications', function(Blueprint $table)
-        {
+        Schema::create('user_verifications', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email', 255)->index();
             $table->string('token', 64)->index();

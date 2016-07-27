@@ -1,4 +1,5 @@
 <?php
+
 Route::group(['namespace' => 'Nodes\Api\Auth\ResetPassword', 'prefix' => 'reset-password', 'middleware' => ['web']], function() {
     // Reset password form
     Route::get('/{token}', [

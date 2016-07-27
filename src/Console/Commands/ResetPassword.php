@@ -1,4 +1,5 @@
 <?php
+
 namespace Nodes\Api\Scaffolding\Console\Commands;
 
 use Illuminate\Console\Command;
@@ -8,54 +9,51 @@ use League\Flysystem\Filesystem as Flysystem;
 use League\Flysystem\MountManager;
 
 /**
- * Class ResetPassword
- *
- * @package Nodes\Api\Scaffolding\Console\Commands
+ * Class ResetPassword.
  */
 class ResetPassword extends Command
 {
     /**
-     * The name and signature of the console command
+     * The name and signature of the console command.
      *
      * @var string
      */
     protected $signature = 'nodes:api:reset-password';
 
     /**
-     * The console command description
+     * The console command description.
      *
      * @var string
      */
     protected $description = 'Generate Nodes API reset password scaffolding';
 
     /**
-     * Laravel filesystem
+     * Laravel filesystem.
      *
      * @var \Illuminate\Filesystem\Filesystem
      */
     protected $filesystem;
 
     /**
-     * Project folder name
+     * Project folder name.
      *
      * @var string
      */
     protected $projectFolderName;
 
     /**
-     * Path to project folder
+     * Path to project folder.
      *
      * @var string
      */
     protected $projectFolderPath;
 
     /**
-     * GenerateScaffolding constructor
+     * GenerateScaffolding constructor.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access public
-     * @param  \Illuminate\Filesystem\Filesystem $filesystem
+     * @param \Illuminate\Filesystem\Filesystem $filesystem
      */
     public function __construct(Filesystem $filesystem)
     {
@@ -65,11 +63,10 @@ class ResetPassword extends Command
     }
 
     /**
-     * Generate scaffolding
+     * Generate scaffolding.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access public
      * @return void
      */
     public function handle()
@@ -97,11 +94,10 @@ class ResetPassword extends Command
     }
 
     /**
-     * Copy reset password routes to project
+     * Copy reset password routes to project.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
      * @return void
      */
     protected function copyRoutesToProject()
@@ -117,11 +113,10 @@ class ResetPassword extends Command
     }
 
     /**
-     * Copy reset password views to project
+     * Copy reset password views to project.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
      * @return void
      */
     protected function copyViewsToProject()
@@ -134,11 +129,10 @@ class ResetPassword extends Command
     }
 
     /**
-     * Copy reset password assets to project
+     * Copy reset password assets to project.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
      * @return void
      */
     protected function copyAssetsToProject()
@@ -151,11 +145,10 @@ class ResetPassword extends Command
     }
 
     /**
-     * Copy reset password database migration file and run it
+     * Copy reset password database migration file and run it.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
      * @return void
      */
     protected function copyAndRunMigration()
@@ -174,13 +167,13 @@ class ResetPassword extends Command
     }
 
     /**
-     * Publish file to application
+     * Publish file to application.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
-     * @param  string $from
-     * @param  string $to
+     * @param string $from
+     * @param string $to
+     *
      * @return void
      */
     protected function copyFile($from, $to)
@@ -203,13 +196,13 @@ class ResetPassword extends Command
     }
 
     /**
-     * Publish directory to application
+     * Publish directory to application.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
-     * @param  string $from
-     * @param  string $to
+     * @param string $from
+     * @param string $to
+     *
      * @return void
      */
     protected function copyDirectory($from, $to)
@@ -217,7 +210,7 @@ class ResetPassword extends Command
         // Load mount manager
         $manager = new MountManager([
             'from' => new Flysystem(new LocalAdapter($from)),
-            'to' => new Flysystem(new LocalAdapter($to)),
+            'to'   => new Flysystem(new LocalAdapter($to)),
         ]);
 
         // Copy directory to application
