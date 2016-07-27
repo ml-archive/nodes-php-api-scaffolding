@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['namespace' => 'Nodes\Api\Auth\ResetPassword', 'prefix' => 'reset-password', 'middleware' => ['web']], function() {
+Route::group(['namespace' => 'Nodes\Api\Auth\ResetPassword', 'prefix' => 'reset-password', 'middleware' => ['web']], function () {
     // Reset password form
     Route::get('/{token}', [
         'as'   => 'nodes.api.auth.reset-password.form',
@@ -20,7 +20,7 @@ Route::group(['namespace' => 'Nodes\Api\Auth\ResetPassword', 'prefix' => 'reset-
     ]);
 });
 
-Route::group(['namespace' => 'Nodes\Api\Auth\EmailVerification', 'prefix' => 'email-verification', 'middleware' => ['web']], function() {
+Route::group(['namespace' => 'Nodes\Api\Auth\EmailVerification', 'prefix' => 'email-verification', 'middleware' => ['web']], function () {
 
     // Confirm email
     Route::get('/{token}/{email}', [
