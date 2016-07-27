@@ -1,22 +1,21 @@
 <?php
+
 namespace Nodes\Api\Scaffolding\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Filesystem\Filesystem;
 use League\Flysystem\Adapter\Local as LocalAdapter;
 use League\Flysystem\Filesystem as Flysystem;
 use League\Flysystem\MountManager;
 
 /**
- * Class Scaffolding
- *
- * @package Nodes\Api\Console\Commands
+ * Class Scaffolding.
  */
 class Scaffolding extends Command
 {
     /**
-     * The name and signature of the console command
+     * The name and signature of the console command.
      *
      * @var string
      */
@@ -24,47 +23,46 @@ class Scaffolding extends Command
                             {--namespace= : Namespace of your project}';
 
     /**
-     * The console command description
+     * The console command description.
      *
      * @var string
      */
     protected $description = 'Generate Nodes API scaffolding';
 
     /**
-     * Laravel filesystem
+     * Laravel filesystem.
      *
      * @var \Illuminate\Filesystem\Filesystem
      */
     protected $filesystem;
 
     /**
-     * Project config
+     * Project config.
      *
      * @var array
      */
     protected $projectConfig;
 
     /**
-     * Project folder name
+     * Project folder name.
      *
      * @var string
      */
     protected $projectFolderName;
 
     /**
-     * Path to project folder
+     * Path to project folder.
      *
      * @var string
      */
     protected $projectFolderPath;
 
     /**
-     * GenerateScaffolding constructor
+     * GenerateScaffolding constructor.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access public
-     * @param  \Illuminate\Filesystem\Filesystem $filesystem
+     * @param \Illuminate\Filesystem\Filesystem $filesystem
      */
     public function __construct(Filesystem $filesystem)
     {
@@ -73,11 +71,10 @@ class Scaffolding extends Command
     }
 
     /**
-     * Generate scaffolding
+     * Generate scaffolding.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access public
      * @return void
      */
     public function handle()
@@ -94,11 +91,10 @@ class Scaffolding extends Command
     }
 
     /**
-     * Ask for the namespace of project
+     * Ask for the namespace of project.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access public
      * @return string
      */
     public function askForNamespace()
@@ -107,16 +103,16 @@ class Scaffolding extends Command
         if (empty($namespace)) {
             return $this->askForNamespace();
         }
+
         return $namespace;
     }
 
     /**
-     * Generate project structure
+     * Generate project structure.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
-     * @return boolean
+     * @return bool
      */
     protected function generateStructure()
     {
@@ -148,11 +144,10 @@ class Scaffolding extends Command
     }
 
     /**
-     * Generate controllers folders
+     * Generate controllers folders.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
      * @return void
      */
     protected function generateControllersFolders()
@@ -182,11 +177,10 @@ class Scaffolding extends Command
     }
 
     /**
-     * Generate models folder
+     * Generate models folder.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
      * @return void
      */
     protected function generateModelsFolder()
@@ -206,11 +200,10 @@ class Scaffolding extends Command
     }
 
     /**
-     * Generate routes folder
+     * Generate routes folder.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
      * @return void
      */
     protected function generateRoutesFolder()
@@ -241,18 +234,18 @@ class Scaffolding extends Command
         // Add route folders to Nodes autoload config
         add_to_autoload_config([
             'project/Routes/Api/',
-            'project/Routes/Frontend/'
+            'project/Routes/Frontend/',
         ]);
     }
 
     /**
-     * Generate .gitkeep file
+     * Generate .gitkeep file.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access public
-     * @param  string $path
-     * @return boolean
+     * @param string $path
+     *
+     * @return bool
      */
     protected function generateGitKeep($path)
     {
@@ -260,12 +253,11 @@ class Scaffolding extends Command
     }
 
     /**
-     * Generate API Scaffolding
+     * Generate API Scaffolding.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
-     * @return boolean
+     * @return bool
      */
     protected function generateScaffolding()
     {
@@ -286,11 +278,10 @@ class Scaffolding extends Command
     }
 
     /**
-     * Scaffold users controller
+     * Scaffold users controller.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
      * @return void
      */
     protected function scaffoldUsersController()
@@ -304,11 +295,10 @@ class Scaffolding extends Command
     }
 
     /**
-     * Scaffold user model
+     * Scaffold user model.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
      * @return void
      */
     protected function scaffoldUserModel()
@@ -325,16 +315,15 @@ class Scaffolding extends Command
 
         // Add user model to API config file
         $authConfig = file_get_contents($authConfigPath);
-        $authConfig = str_replace("'model' => null", "'model' => " . sprintf('%s\Models\Users\User::class', $this->namespace), $authConfig);
+        $authConfig = str_replace("'model' => null", "'model' => ".sprintf('%s\Models\Users\User::class', $this->namespace), $authConfig);
         file_put_contents($authConfigPath, $authConfig);
     }
 
     /**
-     * Scaffold user repository
+     * Scaffold user repository.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
      * @return void
      */
     protected function scaffoldUserRepository()
@@ -347,11 +336,10 @@ class Scaffolding extends Command
     }
 
     /**
-     * Scaffold user validator
+     * Scaffold user validator.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
      * @return void
      */
     protected function scaffoldUserValidator()
@@ -364,11 +352,10 @@ class Scaffolding extends Command
     }
 
     /**
-     * Scaffold user transformer
+     * Scaffold user transformer.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
      * @return void
      */
     protected function scaffoldUserTransformer()
@@ -381,11 +368,10 @@ class Scaffolding extends Command
     }
 
     /**
-     * Scaffold token model
+     * Scaffold token model.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
      * @return void
      */
     protected function scaffoldTokenModel()
@@ -398,11 +384,10 @@ class Scaffolding extends Command
     }
 
     /**
-     * Scaffold user routes
+     * Scaffold user routes.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
      * @return void
      */
     protected function scaffoldUserRoutes()
@@ -415,11 +400,10 @@ class Scaffolding extends Command
     }
 
     /**
-     * Copy and run database migrations
+     * Copy and run database migrations.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access
      * @return void
      */
     protected function copyAndRunDatabaseMigrations()
@@ -435,11 +419,10 @@ class Scaffolding extends Command
     }
 
     /**
-     * Delete Laravel migration boilerplate
+     * Delete Laravel migration boilerplate.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
      * @return void
      */
     protected function deleteLaravelBoilerplate()
@@ -447,7 +430,7 @@ class Scaffolding extends Command
         // Files to delete
         $files = [
             'database/migrations/2014_10_12_000000_create_users_table.php',
-            'database/migrations/2014_10_12_100000_create_password_resets_table.php'
+            'database/migrations/2014_10_12_100000_create_password_resets_table.php',
         ];
 
         // Delete each file individually
@@ -463,13 +446,13 @@ class Scaffolding extends Command
     }
 
     /**
-     * Publish file to application
+     * Publish file to application.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
-     * @param  string $from
-     * @param  string $to
+     * @param string $from
+     * @param string $to
+     *
      * @return void
      */
     protected function copyFile($from, $to)
@@ -492,13 +475,13 @@ class Scaffolding extends Command
     }
 
     /**
-     * Publish directory to application
+     * Publish directory to application.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access protected
-     * @param  string $from
-     * @param  string $to
+     * @param string $from
+     * @param string $to
+     *
      * @return void
      */
     protected function copyDirectory($from, $to)
@@ -506,7 +489,7 @@ class Scaffolding extends Command
         // Load mount manager
         $manager = new MountManager([
             'from' => new Flysystem(new LocalAdapter($from)),
-            'to' => new Flysystem(new LocalAdapter($to)),
+            'to'   => new Flysystem(new LocalAdapter($to)),
         ]);
 
         // Copy directory to application
@@ -525,13 +508,13 @@ class Scaffolding extends Command
     }
 
     /**
-     * Generate and save stub file
+     * Generate and save stub file.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access public
-     * @param  string $stub
-     * @param  string $destination
+     * @param string $stub
+     * @param string $destination
+     *
      * @return void
      */
     private function generateStubFile($stub, $destination)
@@ -542,6 +525,7 @@ class Scaffolding extends Command
             $template = $this->replaceNamespace($template);
         } catch (FileNotFoundException $e) {
             $this->error(sprintf('Could not locate file: %s', $stub));
+
             return;
         }
 
@@ -560,12 +544,12 @@ class Scaffolding extends Command
     }
 
     /**
-     * Replace namespace in stub content
+     * Replace namespace in stub content.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access private
-     * @param  string $content
+     * @param string $content
+     *
      * @return string
      */
     private function replaceNamespace($content)
@@ -574,11 +558,10 @@ class Scaffolding extends Command
     }
 
     /**
-     * Add "project" to composer file
+     * Add "project" to composer file.
      *
      * @author Morten Rugaard <moru@nodes.dk>
      *
-     * @access private
      * @return void
      */
     private function addToComposer()

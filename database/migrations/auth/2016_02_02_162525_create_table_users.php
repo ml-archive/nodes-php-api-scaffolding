@@ -1,21 +1,21 @@
 <?php
-use Illuminate\Database\Schema\Blueprint;
+
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 /**
- * Class CreateTableUsers
+ * Class CreateTableUsers.
  */
 class CreateTableUsers extends Migration
 {
     /**
-     * Run the migrations
+     * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('users', function(Blueprint $table)
-        {
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 255);
             $table->string('email', 190)->unique();
@@ -28,7 +28,7 @@ class CreateTableUsers extends Migration
     }
 
     /**
-     * Reverse the migrations
+     * Reverse the migrations.
      *
      * @return void
      */
