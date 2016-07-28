@@ -72,7 +72,7 @@ class ResetPassword extends Command
     public function handle()
     {
         // Ask for confirmation
-        if (!$this->confirm('Do you wish to copy Nodes API reset password scaffolding? <comment>Note: Existing files will be overwritten.</comment>', true)) {
+        if (! $this->confirm('Do you wish to copy Nodes API reset password scaffolding? <comment>Note: Existing files will be overwritten.</comment>', true)) {
             return;
         }
 
@@ -181,7 +181,7 @@ class ResetPassword extends Command
         // If destination directory doesn't exist,
         // we'll create before copying the config files
         $directoryDestination = dirname($to);
-        if (!$this->filesystem->isDirectory($directoryDestination)) {
+        if (! $this->filesystem->isDirectory($directoryDestination)) {
             $this->filesystem->makeDirectory($directoryDestination, 0755, true);
         }
 
