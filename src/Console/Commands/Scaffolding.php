@@ -117,7 +117,7 @@ class Scaffolding extends Command
     protected function generateStructure()
     {
         // Confirm generation of project structure
-        if (!$this->confirm('Do you wish to generate Nodes API structure?', true)) {
+        if (! $this->confirm('Do you wish to generate Nodes API structure?', true)) {
             return false;
         }
 
@@ -128,7 +128,7 @@ class Scaffolding extends Command
         }
 
         // Create project folder if it doesn't exist
-        if (!$this->filesystem->exists($this->projectFolderPath)) {
+        if (! $this->filesystem->exists($this->projectFolderPath)) {
             $this->filesystem->makeDirectory($this->projectFolderPath, 0755, true);
         }
 
@@ -157,7 +157,7 @@ class Scaffolding extends Command
 
         // Create API controller folder and put .gitkeep in there
         $controllersApiPath = sprintf('%s/%s/%s', $this->projectFolderPath, 'Controllers', 'Api');
-        if (!$this->filesystem->exists($controllersApiPath)) {
+        if (! $this->filesystem->exists($controllersApiPath)) {
             $this->filesystem->makeDirectory($controllersApiPath, 0755, true);
             $this->generateGitKeep($controllersApiPath);
             $this->line(sprintf('<info>Created folder</info> <comment>[%s]</comment>', sprintf('%s/%s/%s', $this->projectFolderName, 'Controllers', 'Api')));
@@ -167,7 +167,7 @@ class Scaffolding extends Command
 
         // Create Frontend controller folder and put .gitkeep in there
         $controllersFrontendPath = sprintf('%s/%s/%s', $this->projectFolderPath, 'Controllers', 'Frontend');
-        if (!$this->filesystem->exists($controllersFrontendPath)) {
+        if (! $this->filesystem->exists($controllersFrontendPath)) {
             $this->filesystem->makeDirectory($controllersFrontendPath, 0755, true);
             $this->generateGitKeep($controllersFrontendPath);
             $this->line(sprintf('<info>Created folder</info> <comment>[%s]</comment>', sprintf('%s/%s/%s', $this->projectFolderName, 'Controllers', 'Frontend')));
@@ -190,7 +190,7 @@ class Scaffolding extends Command
 
         // Create models folders and put .gitkeep in there
         $modelsPath = sprintf('%s/%s', $this->projectFolderPath, 'Models');
-        if (!$this->filesystem->exists($modelsPath)) {
+        if (! $this->filesystem->exists($modelsPath)) {
             $this->filesystem->makeDirectory($modelsPath, 0755, true);
             $this->generateGitKeep($modelsPath);
             $this->line(sprintf('<info>Created folder</info> <comment>[%s]</comment>', sprintf('%s/%s', $this->projectFolderName, 'Models')));
@@ -213,7 +213,7 @@ class Scaffolding extends Command
 
         // Create API routes folder and put .gitkeep in there
         $routesApiPath = sprintf('%s/%s/%s', $this->projectFolderPath, 'Routes', 'Api');
-        if (!$this->filesystem->exists($routesApiPath)) {
+        if (! $this->filesystem->exists($routesApiPath)) {
             $this->filesystem->makeDirectory($routesApiPath, 0755, true);
             $this->generateGitKeep($routesApiPath);
             $this->line(sprintf('<info>Created folder</info> <comment>[%s]</comment>', sprintf('%s/%s/%s', $this->projectFolderName, 'Routes', 'Api')));
@@ -223,7 +223,7 @@ class Scaffolding extends Command
 
         // Create Frontend routes folder and put .gitkeep in there
         $routesFrontendPath = sprintf('%s/%s/%s', $this->projectFolderPath, 'Routes', 'Frontend');
-        if (!$this->filesystem->exists($routesFrontendPath)) {
+        if (! $this->filesystem->exists($routesFrontendPath)) {
             $this->filesystem->makeDirectory($routesFrontendPath, 0755, true);
             $this->generateGitKeep($routesFrontendPath);
             $this->line(sprintf('<info>Created folder</info> <comment>[%s]</comment>', sprintf('%s/%s/%s', $this->projectFolderName, 'Routes', 'Frontend')));
@@ -261,7 +261,7 @@ class Scaffolding extends Command
      */
     protected function generateScaffolding()
     {
-        if (!$this->confirm('Do you wish to generate Nodes API scaffolding? <comment>Note: Existing files will be overwritten.</comment>', true)) {
+        if (! $this->confirm('Do you wish to generate Nodes API scaffolding? <comment>Note: Existing files will be overwritten.</comment>', true)) {
             return false;
         }
 
@@ -436,7 +436,7 @@ class Scaffolding extends Command
         // Delete each file individually
         foreach ($files as $file) {
             // Skip if file doesn't exist
-            if (!$this->filesystem->exists(base_path($file))) {
+            if (! $this->filesystem->exists(base_path($file))) {
                 continue;
             }
 
@@ -460,7 +460,7 @@ class Scaffolding extends Command
         // If destination directory doesn't exist,
         // we'll create before copying the config files
         $directoryDestination = dirname($to);
-        if (!$this->filesystem->isDirectory($directoryDestination)) {
+        if (! $this->filesystem->isDirectory($directoryDestination)) {
             $this->filesystem->makeDirectory($directoryDestination, 0755, true);
         }
 
@@ -533,7 +533,7 @@ class Scaffolding extends Command
         $destinationFolderPath = substr($destination, 0, strrpos($destination, '/'));
 
         // Create destination folder if it doesn't exist
-        if (!$this->filesystem->exists($destinationFolderPath)) {
+        if (! $this->filesystem->exists($destinationFolderPath)) {
             $this->filesystem->makeDirectory($destinationFolderPath, 0755, true);
         }
 
