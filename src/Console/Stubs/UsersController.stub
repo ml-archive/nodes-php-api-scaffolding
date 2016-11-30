@@ -5,6 +5,7 @@ use Illuminate\Routing\Controller as IlluminateController;
 use Illuminate\Support\Facades\Input;
 use Nodes\Api\Auth\Exceptions\UnauthorizedException;
 use Nodes\Api\Http\Response;
+use Nodes\Api\Routing\Helpers as ApiHelper;
 use DummyNamespace\Models\Users\UserRepository;
 use DummyNamespace\Models\Users\Transformers\UserTransformer;
 
@@ -15,6 +16,8 @@ use DummyNamespace\Models\Users\Transformers\UserTransformer;
  */
 class UsersController extends IlluminateController
 {
+    use ApiHelper;
+    
     /**
      * User Repository
      *
@@ -41,7 +44,7 @@ class UsersController extends IlluminateController
     */
     public function me() : Response
     {
-        return $this->item(api_user(), new UserTransformer);
+        return $this->response->item(api_user(), new UserTransformer);
     }
 
     /**
@@ -55,7 +58,7 @@ class UsersController extends IlluminateController
     {
         $user = $this->userRepository->getByIdOrFail($userId);
 
-        return $this->item($user, new UserTransformer);
+        return $this->response->item($user, new UserTransformer);
     }
 
     /**
@@ -77,7 +80,7 @@ class UsersController extends IlluminateController
             throw new UnauthorizedException('Authentication failed');
         }
 
-        return $this->item($user, new UserTransformer);
+        return $this->response->item($user, new UserTransformer);
     }
 
     /**
@@ -96,7 +99,7 @@ class UsersController extends IlluminateController
         // Create new user
         $user = $this->userRepository->createUser($data);
 
-        return $this->item($user, new UserTransformer)->setStatusCode(201);
+        return $this->response->item($user, new UserTransformer)->setStatusCode(201);
     }
 
     /**
@@ -115,6 +118,6 @@ class UsersController extends IlluminateController
         // Update user details
         $user = $this->userRepository->updateUser(api_user(), $data);
 
-        return $this->item($user, new UserTransformer);
+        return $this->response->item($user, new UserTransformer);
     }
 }
