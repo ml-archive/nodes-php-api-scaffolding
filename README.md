@@ -1,5 +1,7 @@
 ## API Scaffolding
 
+⚠️**This package is deprecated**⚠️
+
 A package which scaffolds the most common stuff used in a [Nodes API](http://nodesagency.com) project.
 
 [![Total downloads](https://img.shields.io/packagist/dt/nodes/api-scaffolding.svg)](https://packagist.org/packages/nodes/api-scaffolding)
